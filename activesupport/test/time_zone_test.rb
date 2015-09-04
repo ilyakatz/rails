@@ -425,6 +425,11 @@ class TimeZoneTest < ActiveSupport::TestCase
     assert_equal "-0500", zone.formatted_offset(false)
   end
 
+  def test_formatted_offset_dst
+    zone = ActiveSupport::TimeZone['Amsterdam']
+    assert_equal "+02:00", zone.formatted_offset
+  end
+
   def test_z_format_strings
     zone = ActiveSupport::TimeZone['Tokyo']
     twz = zone.now
@@ -456,6 +461,7 @@ class TimeZoneTest < ActiveSupport::TestCase
 
   def test_to_s
     assert_equal "(GMT+05:30) New Delhi", ActiveSupport::TimeZone['New Delhi'].to_s
+    assert_equal "(GMT+02:00) Amsterdam", ActiveSupport::TimeZone['Amsterdam'].to_s
   end
 
   def test_all_sorted
