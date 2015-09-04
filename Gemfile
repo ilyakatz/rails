@@ -76,6 +76,7 @@ group :test do
   end
 
   gem 'benchmark-ips'
+  gem 'timecop'
 end
 
 platforms :ruby do

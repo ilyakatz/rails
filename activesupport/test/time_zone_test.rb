@@ -2,6 +2,7 @@ require 'abstract_unit'
 require 'active_support/time'
 require 'time_zone_test_helpers'
 require 'yaml'
+require 'timecop'
 
 class TimeZoneTest < ActiveSupport::TestCase
   include TimeZoneTestHelpers
@@ -426,8 +427,10 @@ class TimeZoneTest < ActiveSupport::TestCase
   end
 
   def test_formatted_offset_dst
-    zone = ActiveSupport::TimeZone['Amsterdam']
-    assert_equal "+02:00", zone.formatted_offset
+    Timecop.travel("2015-09-04") do
+      zone = ActiveSupport::TimeZone['Amsterdam']
+      assert_equal "+02:00", zone.formatted_offset
+    end
   end
 
   def test_z_format_strings
